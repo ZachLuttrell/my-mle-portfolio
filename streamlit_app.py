@@ -3,7 +3,7 @@ import streamlit as st
 # Set page title and description
 st.set_page_config(page_title="Zach's Machine Learning Portfolio", layout="centered")
 
-# Custom CSS for styling (optional)
+# Custom CSS for styling
 st.markdown(
     """
     <style>
