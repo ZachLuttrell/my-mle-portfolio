@@ -20,11 +20,12 @@ st.markdown(
         border-radius: 10px;
         box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
         text-align: center;
-        transition: transform 0.2s;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
         height: 100%;
     }
     .project-card:hover {
-        transform: scale(1.02);
+        transform: scale(1.05) rotate(1deg);
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
     }
     .project-title {
         font-size: 22px;
@@ -43,10 +44,11 @@ st.markdown(
         padding: 10px 20px;
         text-decoration: none;
         border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
     }
     .view-project-button:hover {
         background-color: #45a049;
-        text-decoration: none;
+        transform: translateY(-3px);
     }
     </style>
     """, unsafe_allow_html=True
