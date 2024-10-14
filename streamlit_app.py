@@ -50,6 +50,18 @@ st.markdown(
         background-color: #45a049;
         transform: translateY(-3px);
     }
+    .row {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    .project-card-wrapper {
+        flex: 1;
+        min-width: 300px;
+        max-width: 300px;
+    }
     </style>
     """, unsafe_allow_html=True
 )
@@ -64,85 +76,46 @@ Hi, I'm Zach! This app showcases my machine learning projects. Explore the diffe
 
 # Function to create a project card
 def create_project_card(title, description, button_text, link):
-    st.markdown(f"""
-        <div class="project-card">
-            <div class="project-title">{title}</div>
-            <div class="project-description">{description}</div>
-            <a href="{link}" class="view-project-button">{button_text}</a>
+    return f"""
+        <div class="project-card-wrapper">
+            <div class="project-card">
+                <div class="project-title">{title}</div>
+                <div class="project-description">{description}</div>
+                <a href="{link}" class="view-project-button">{button_text}</a>
+            </div>
         </div>
-    """, unsafe_allow_html=True)
+    """
 
-# Create a 3-column layout for the project cards
+# List of project information
+projects = [
+    ("Regression", "Projects demonstrating skills in linear regression, ridge/lasso regression, and more. Predicting house prices, stock prices, and more.", "View Regression Projects", "#regression"),
+    ("Clustering", "Unsupervised learning projects using clustering techniques like K-Means and DBSCAN. Segment customers or data points based on patterns.", "View Clustering Projects", "#clustering"),
+    ("Classification", "Classification projects focusing on binary and multi-class tasks. Includes heart disease prediction and iris classification.", "View Classification Projects", "#classification"),
+    ("Natural Language Processing", "NLP projects that process text data. Includes sentiment analysis, spam detection, and more.", "View NLP Projects", "#nlp"),
+    ("Time Series Forecasting", "Time series forecasting projects such as predicting energy consumption and stock prices using ARIMA and LSTMs.", "View Time Series Projects", "#timeseries"),
+    ("Recommendation Systems", "Recommendation system projects using collaborative filtering and matrix factorization techniques.", "View Recommendation Projects", "#recommendation"),
+    ("Anomaly Detection", "Projects detecting anomalies, such as fraud detection using techniques like Isolation Forest and One-Class SVM.", "View Anomaly Detection Projects", "#anomaly"),
+    ("Dimensionality Reduction", "Projects using PCA and t-SNE for dimensionality reduction and data visualization.", "View Dimensionality Reduction Projects", "#dimensionality")
+]
+
+# Display project cards in rows
 st.subheader("Explore My Projects")
 
-col1, col2, col3 = st.columns(3)
+card_html = """
+    <div class="row">
+"""
+for i, project in enumerate(projects):
+    card_html += create_project_card(*project)
+    if (i + 1) % 3 == 0 and i + 1 != len(projects):
+        card_html += """
+    </div>
+    <div class="row">
+"""
+card_html += "</div>"
 
-with col1:
-    create_project_card(
-        "Regression",
-        "Projects demonstrating skills in linear regression, ridge/lasso regression, and more. Predicting house prices, stock prices, and more.",
-        "View Regression Projects",
-        "#regression"
-    )
-    create_project_card(
-        "Clustering",
-        "Unsupervised learning projects using clustering techniques like K-Means and DBSCAN. Segment customers or data points based on patterns.",
-        "View Clustering Projects",
-        "#clustering"
-    )
-
-with col2:
-    create_project_card(
-        "Classification",
-        "Classification projects focusing on binary and multi-class tasks. Includes heart disease prediction and iris classification.",
-        "View Classification Projects",
-        "#classification"
-    )
-    create_project_card(
-        "Natural Language Processing",
-        "NLP projects that process text data. Includes sentiment analysis, spam detection, and more.",
-        "View NLP Projects",
-        "#nlp"
-    )
-
-with col3:
-    create_project_card(
-        "Time Series Forecasting",
-        "Time series forecasting projects such as predicting energy consumption and stock prices using ARIMA and LSTMs.",
-        "View Time Series Projects",
-        "#timeseries"
-    )
-    create_project_card(
-        "Recommendation Systems",
-        "Recommendation system projects using collaborative filtering and matrix factorization techniques.",
-        "View Recommendation Projects",
-        "#recommendation"
-    )
-
-# Add another row for remaining projects
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    create_project_card(
-        "Anomaly Detection",
-        "Projects detecting anomalies, such as fraud detection using techniques like Isolation Forest and One-Class SVM.",
-        "View Anomaly Detection Projects",
-        "#anomaly"
-    )
-
-with col2:
-    create_project_card(
-        "Dimensionality Reduction",
-        "Projects using PCA and t-SNE for dimensionality reduction and data visualization.",
-        "View Dimensionality Reduction Projects",
-        "#dimensionality"
-    )
-
-# Leave the third column empty in the second row for symmetry, if desired
-with col3:
-    st.write("")
+st.markdown(card_html, unsafe_allow_html=True)
 
 # Contact Information
 st.write("""
-If you have any questions or would like to get in touch, feel free to reach out via [LinkedIn](https://www.linkedin.com) or email me at zach@example.com.
+If you have any questions or would like to get in touch, feel free to reach out via [LinkedIn](https://www.linkedin.com/in/zacharyluttrell) or email me at zacharywluttrell@gmail.com.
 """)
